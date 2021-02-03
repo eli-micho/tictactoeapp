@@ -1,28 +1,9 @@
-//Global Variables
-
-const gameboard = [];
-
-//Create Player
-/* const Player1 = () => {
-    const playerMark = 'X'
-    return { playerMark }
-}
-
-const Player2 = () => {
-    const playerTurn = 
-} */
-
-const Player = (player) => {
-
-    return player 
-}
-
-const player1 = Player('X');
-const player2 = Player('O');
 
 //Create Gameboard
 
 const gameBoard = (() => {
+    const gameState = ['','','','','','','','',''];
+
     const board = document.querySelector('.board');
 
     for(let i = 0; i <= 8; i++){
@@ -32,35 +13,38 @@ const gameBoard = (() => {
         boardSquare.setAttribute('id', `${i}`);
         board.appendChild(boardSquare);
     }
-    return { board };
-  })();
 
-function checkPlayerTurn(player) {
-    if(player == player1){
-        return takeTurn()
-    }
-}
-
-const displayController = (() => {
-    const startPlayer = player1;
-
-    checkPlayerTurn(startPlayer);
-
+    return { gameState, board };
 })();
 
+const displayController = (() => {
 
+    let currentPlayer = 'X';
+    
 
-function takeTurn(where, player) {
-   const turnSquare =  document.getElementById(`${where}`);
-   turnSquare.textContent = `${player}`
-}
+    const handleTurn = (targetCell, index) => {
+        gameBoard.gameState[index] = currentPlayer;
+        targetCell.innerHTML = currentPlayer;
+        handlePlayerChange()
+    };
+
+    const handlePlayerChange = () => {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X'
+    }
+    
+    return { handleTurn };
+
+})();
 
 //Event Listeners
 document.addEventListener('click', function(e){
     if(e.target && e.target.className == 'square'){
-        const where = e.target.id;
-        const player = player1;
+        const targetCell = e.target
+        const index = e.target.id;
 
-        takeTurn(where, player)
+        if(gameBoard.gameState[index] !== '') return false;
+
+        displayController.handleTurn(targetCell, index)
+
     }
 })
