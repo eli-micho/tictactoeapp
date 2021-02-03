@@ -31,7 +31,6 @@ const displayController = (() => {
 
     let currentPlayer = 'X';
     
-
     const handleTurn = (targetCell, index) => {
         gameBoard.gameState[index] = currentPlayer;
         targetCell.innerHTML = currentPlayer;
@@ -43,9 +42,19 @@ const displayController = (() => {
         currentTurn(currentPlayer)
     }
     
-    return { handleTurn };
+    return currentPlayer, { handleTurn };
 
 })();
+
+
+//ResetGame 
+
+const handleResetGame = () => {
+    gameBoard.gameState = ['','','','','','','','',''];
+    displayController.currentPlayer = 'X';
+    currentTurn(displayController.currentPlayer)
+    document.querySelectorAll('.square').forEach(el => el.innerHTML = '')
+}
 
 //Event Listeners
 document.addEventListener('click', function(e){
@@ -58,4 +67,11 @@ document.addEventListener('click', function(e){
         displayController.handleTurn(targetCell, index)
 
     }
+
+    if(e.target && e.target.className == 'resetBtn'){
+        handleResetGame()
+    }
 })
+
+/* const reset = document.querySelector('.resetBtn')
+reset.addEventListener('onclick', ) */
