@@ -1,0 +1,25 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    box-sizing: border-box;
+}
+
+header {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid;
+}
+
+.board {
+    width: 606px;
+    height: 600px;
+    border: 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    width: 200px;
+    height: 200px;
+    border: 1px solid;
+    cursor: pointer;
+}
