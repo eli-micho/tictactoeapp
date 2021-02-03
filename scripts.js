@@ -1,3 +1,13 @@
+//Update Current Player Turn
+const currentTurn = (currentPlayer) => {
+    if(currentPlayer == 'X'){
+        document.querySelector('#cp1').style.display = 'inline-block';
+        document.querySelector('#cp2').style.display = 'none';
+    }else{
+        document.querySelector('#cp1').style.display = 'none';
+        document.querySelector('#cp2').style.display = 'inline-block';
+    }
+};
 
 //Create Gameboard
 
@@ -30,6 +40,7 @@ const displayController = (() => {
 
     const handlePlayerChange = () => {
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X'
+        currentTurn(currentPlayer)
     }
     
     return { handleTurn };
